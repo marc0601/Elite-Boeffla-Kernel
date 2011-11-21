@@ -59,6 +59,51 @@ int kthread_should_stop(void)
 EXPORT_SYMBOL(kthread_should_stop);
 
 /**
+<<<<<<< HEAD
+=======
+ * kthread_should_park - should this kthread park now?
+ *
+ * When someone calls kthread_park() on your kthread, it will be woken
+ * and this will return true.  You should then do the necessary
+ * cleanup and call kthread_parkme()
+ *
+ * Similar to kthread_should_stop(), but this keeps the thread alive
+ * and in a park position. kthread_unpark() "restarts" the thread and
+ * calls the thread function again.
+ */
+
+bool kthread_should_park(void)
+{
+	return test_bit(KTHREAD_SHOULD_PARK, &to_kthread(current)->flags);
+}
+
+/**
+ * kthread_freezable_should_stop - should this freezable kthread return now?
+ * @was_frozen: optional out parameter, indicates whether %current was frozen
+ *
+ * kthread_should_stop() for freezable kthreads, which will enter
+ * refrigerator if necessary.  This function is safe from kthread_stop() /
+ * freezer deadlock and freezable kthreads should use this function instead
+ * of calling try_to_freeze() directly.
+ */
+bool kthread_freezable_should_stop(bool *was_frozen)
+{
+	bool frozen = false;
+
+	might_sleep();
+
+	if (unlikely(freezing(current)))
+		frozen = __refrigerator(true);
+
+	if (was_frozen)
+		*was_frozen = frozen;
+
+	return kthread_should_stop();
+}
+EXPORT_SYMBOL_GPL(kthread_freezable_should_stop);
+
+/**
+>>>>>>> 9a4ab16a5c3... freezer: implement and use kthread_freezable_should_stop()
  * kthread_data - return data value specified on kthread creation
  * @task: kthread task in question
  *
