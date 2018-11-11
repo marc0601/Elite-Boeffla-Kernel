@@ -418,7 +418,6 @@ static void wakeup_source_activate(struct wakeup_source *ws)
 	return;
 	}
 
-
 	ws->active = true;
 	ws->active_count++;
 	ws->timer_expires = jiffies;
