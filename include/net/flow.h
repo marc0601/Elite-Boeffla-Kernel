@@ -10,8 +10,6 @@
 #include <linux/socket.h>
 #include <linux/in6.h>
 #include <asm/atomic.h>
-#include <linux/atomic.h>
-#include <linux/uidgid.h>
 
 struct flowi_common {
 	int	flowic_oif;
@@ -25,7 +23,6 @@ struct flowi_common {
 #define FLOWI_FLAG_PRECOW_METRICS	0x02
 #define FLOWI_FLAG_CAN_SLEEP		0x04
 	__u32	flowic_secid;
-	kuid_t  flowic_uid;
 };
 
 union flowi_uli {
