@@ -393,31 +393,6 @@ static void wakeup_source_activate(struct wakeup_source *ws)
 {
 	unsigned int cec;
 
-	if (!enable_l2_hsic && !strcmp(ws->name, "l2_hsic")) {
-	wakeup_source_deactivate(ws);
-	return;
-	}
-
-	if (!enable_wlan_ctrl_wake && !strcmp(ws->name, "wlan_ctrl_wake")) {
-	wakeup_source_deactivate(ws);
-	return;
-	}
-
-	if (!enable_wlan_rx_wake && !strcmp(ws->name, "wlan_rx_wake")) {
-	wakeup_source_deactivate(ws);
-	return;
-	}
-
-	if (!enable_wlan_wake && !strcmp(ws->name, "wlan_wake")) {
-	wakeup_source_deactivate(ws);
-	return;
-	}
-
-	if (!enable_wlan_wd_wake && !strcmp(ws->name, "wlan_wd_wake")) {
-	wakeup_source_deactivate(ws);
-	return;
-	}
-
 	ws->active = true;
 	ws->active_count++;
 	ws->timer_expires = jiffies;
