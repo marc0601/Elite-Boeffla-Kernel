@@ -30,7 +30,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int valu
 /*****************************************/
 
 // Boeffla sound general
-#define BOEFFLA_SOUND_DEFAULT   1
+#define BOEFFLA_SOUND_DEFAULT     1
 #define BOEFFLA_SOUND_VERSION 	"1.6.7"
 
 // Debug mode
@@ -123,7 +123,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int valu
 #define SPEAKER_BOOST_TUNED	6
 
 // FLL tuning loop gains
-#define FLL_LOOP_GAIN_DEFAULT 1	
+#define FLL_LOOP_GAIN_DEFAULT 0
 #define FLL_LOOP_GAIN_TUNED	5
 
 // Stereo expansion
